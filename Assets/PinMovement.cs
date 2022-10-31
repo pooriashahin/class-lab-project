@@ -5,6 +5,7 @@ using UnityEngine;
 public class PinMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D pin;
+    [SerializeField] GameObject controller;
     // [SerializeField] GameObject mario;
     [SerializeField] AudioSource audio;
     // [SerializeField] float horizontalMovement;
@@ -28,6 +29,10 @@ public class PinMovement : MonoBehaviour
         if (audio == null)
         {
             audio = GetComponent<AudioSource>();
+        }
+
+        if (controller == null) {
+            controller = GameObject.FindGameObjectWithTag("GameController");
         }
 
         // if (mario == null)
@@ -104,6 +109,7 @@ public class PinMovement : MonoBehaviour
 
 
             //1. increase score
+            controller.GetComponent<ScoreKeeper>().addScore();
             // controller.GetComponent<Scorekeeper>().AddPoints();
 
             //2. play sound effect

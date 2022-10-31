@@ -16,6 +16,7 @@ public class NewBehaviourScript : MonoBehaviour
 
             balloon = GetComponent<Rigidbody2D>();
         }
+        InvokeRepeating("Grow", 1.0f, 1.0f);
 
     }
 
@@ -37,6 +38,10 @@ public class NewBehaviourScript : MonoBehaviour
         transform.Rotate(0, 180, 0);
         speed=-speed;
         balloon.velocity = new Vector2(speed, balloon.velocity.y);
+    }
+
+    void Grow() {
+        transform.localScale = transform.localScale + new Vector3(0.01f, 0.01f);
     }
 
        
