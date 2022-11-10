@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     [SerializeField] Rigidbody2D balloon;
     [SerializeField] float speed;
+    [SerializeField] public double balloonScore = 10.0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +28,12 @@ public class NewBehaviourScript : MonoBehaviour
 
     void FixedUpdate() {
         balloon.velocity = new Vector2(speed, balloon.velocity.y);
-        if(balloon.position.x < -6 || balloon.position.x > 18) {
+        if(balloon.position.x < -20 || balloon.position.x > 30) {
             Flip();
+        }
+
+        if (transform.localScale.x > 0.75) {
+            Destroy(gameObject);
         }
 
         
@@ -42,6 +47,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Grow() {
         transform.localScale = transform.localScale + new Vector3(0.01f, 0.01f);
+        balloonScore *= 0.9;
     }
 
        

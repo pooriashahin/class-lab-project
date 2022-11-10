@@ -76,7 +76,7 @@ public class PinMovement : MonoBehaviour
         //     Jump();
         // }
         // balloon.position = new Vector2(100, 0);
-        if(pin.position.x < -6 || pin.position.x > 38) {
+        if(pin.position.x < -25 || pin.position.x > 35) {
             ResetPin();
         }
 
@@ -109,7 +109,7 @@ public class PinMovement : MonoBehaviour
 
 
             //1. increase score
-            controller.GetComponent<ScoreKeeper>().addScore();
+            controller.GetComponent<ScoreKeeper>().addScore((1 - other.gameObject.transform.localScale.x) * 100);
             // controller.GetComponent<Scorekeeper>().AddPoints();
 
             //2. play sound effect
