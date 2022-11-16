@@ -9,6 +9,10 @@ TagManager:
   - mario
   - myBalloon
   - myPin
+  - showOnPause
+  - showOnResume
+  - ShowOnPause
+  - ShowOnResume
   layers:
   - Default
   - TransparentFX

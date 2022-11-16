@@ -7,18 +7,21 @@ using UnityEngine.SceneManagement;
 public class ScoreKeeper : MonoBehaviour
 {
 
-    [SerializeField] float score = 0.0f;
+    [SerializeField] float score;
     [SerializeField] Text scoreText;
     [SerializeField] Text levelText;
+    [SerializeField] Text playerName;
     [SerializeField] int level;
 
     const int DEFAULT_POINTS = 1;
     // Start is called before the first frame update
     void Start()
     {
+        score = PersistentData.Instance.GetScore();
         level = SceneManager.GetActiveScene().buildIndex - 1;
         scoreText.text = "Score: " + score;
         levelText.text = "Level " + (level);
+        playerName.text = "Name: " + PersistentData.Instance.GetName();
     }
 
     // Update is called once per frame
@@ -38,7 +41,9 @@ public class ScoreKeeper : MonoBehaviour
 
     public void addScore(float added) {
 
+
         score += added;
+        PersistentData.Instance.SetScore(score);
         scoreText.text = "Score: " + score;
          if (score > 0.50) {
             UpdateLevel();

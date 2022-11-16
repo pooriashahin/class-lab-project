@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ButtonFunctions : MonoBehaviour
 {
+
+    [SerializeField] InputField NameField;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,8 @@ public class ButtonFunctions : MonoBehaviour
     }
 
     public void GoToLevel1() {
+        string name = NameField.text;
+        PersistentData.Instance.SetName(name);
         SceneManager.LoadScene("level1");
     }
 }
