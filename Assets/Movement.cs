@@ -12,15 +12,19 @@ public class Movement : MonoBehaviour
     [SerializeField] bool isFacingRight = true;
     [SerializeField] bool jumpPressed = false;
     [SerializeField] bool isGrounded = true;
-
+    [SerializeField] Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         if (rigid == null) {
             rigid = GetComponent<Rigidbody2D>();
         }
+         if (animator == null) {
+            animator = GetComponent<Animator>();
+        }
         // speed = 15;
         // jumpForce = 750.0f;
+
     }
 
     // Update is called once per frame
@@ -39,14 +43,25 @@ public class Movement : MonoBehaviour
 
 
     void Jump() {
+
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
 		rigid.AddForce(new Vector2(0, jumpForce));
+        animator.SetInteger("motion", 2);
 		jumpPressed = false;
 		isGrounded = false;
     }
 
     void FixedUpdate()
     {
+
+        if (!jumpPressed  && isGrounded) {
+            if(horizontalMovement < 0 || horizontalMovement > 0) {
+            animator.SetInteger("motion", 1);
+            } else {
+            animator.SetInteger("motion", 0);
+            }
+        }
+        
 
         rigid.velocity = new Vector2(horizontalMovement * speed, rigid.velocity.y);
         if(horizontalMovement < 0 && isFacingRight || horizontalMovement > 0 && !isFacingRight) {
