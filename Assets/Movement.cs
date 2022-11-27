@@ -7,12 +7,14 @@ public class Movement : MonoBehaviour
     [SerializeField] public static Rigidbody2D rigid;
     [SerializeField] float horizontalMovement;
     [SerializeField] float verticalMovement;
+    [SerializeField] bool isShot;
     [SerializeField] int speed = 15;
-    [SerializeField] float jumpForce = 500.0f;
+    [SerializeField] float jumpForce = 5000.0f;
     [SerializeField] bool isFacingRight = true;
     [SerializeField] bool jumpPressed = false;
     [SerializeField] bool isGrounded = true;
     [SerializeField] Animator animator;
+    [SerializeField] GameObject fire;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +34,13 @@ public class Movement : MonoBehaviour
     {
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
+        isShot = Input.GetButtonDown("Fire1");
         if (Input.GetButtonDown("Jump"))
 			jumpPressed = true;
+
+        if (Input.GetButtonDown("Fire1")) {
+            Shoot();
+        }
     }
 
     void Flip() {
@@ -61,7 +68,6 @@ public class Movement : MonoBehaviour
             animator.SetInteger("motion", 0);
             }
         }
-        
 
         rigid.velocity = new Vector2(horizontalMovement * speed, rigid.velocity.y);
         if(horizontalMovement < 0 && isFacingRight || horizontalMovement > 0 && !isFacingRight) {
@@ -70,12 +76,21 @@ public class Movement : MonoBehaviour
         if (jumpPressed && isGrounded) {
             Jump();
         }
-        // balloon.position = new Vector2(100, 0);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Ground") {
             isGrounded = true;
         }
+    }
+
+    void Shoot() {
+        int direction = isFacingRight ? 1 : -1;
+        Vector2 position = new Vector2(rigid.position.x + direction/10, rigid.position.y);
+        GameObject pin = Instantiate(fire, position, Quaternion.identity);
+        pin.SetActive(true);
+        if (direction == -1)
+            pin.transform.Rotate(0, 180, 0);
+        pin.GetComponent<Rigidbody2D>().velocity = new Vector2(100000 * direction, rigid.velocity.y);
     }
 }

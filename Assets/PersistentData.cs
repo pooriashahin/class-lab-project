@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PersistentData : MonoBehaviour
 {
     [SerializeField] string playerName;
-    [SerializeField] float playerScore;
+    [SerializeField] int playerScore;
     public static PersistentData Instance;
     
     void Awake() {
@@ -36,7 +36,7 @@ public class PersistentData : MonoBehaviour
         playerName = name;
     }
 
-    public void SetScore (float score) {
+    public void SetScore (int score) {
         playerScore = score;
     }
 
@@ -44,7 +44,7 @@ public class PersistentData : MonoBehaviour
         return playerName;
     }
 
-    public float GetScore () {
+    public int GetScore () {
         return playerScore;
     }
 }

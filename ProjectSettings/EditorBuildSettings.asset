@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: 971382f29ac354b8797e1af71ad27bdd
+  - enabled: 1
+    path: Assets/Scenes/HighestScores.unity
+    guid: 31fb04e1f51aa44b58793abd7cb07378
   m_configObjects: {}

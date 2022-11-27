@@ -28,6 +28,14 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene("main");
     }
 
+    public void GoToScoreboard() {
+        SceneManager.LoadScene("highestScores");
+    }
+
+    public void GoToSettings() {
+        SceneManager.LoadScene("settings");
+    }
+
     public void GoToLevel1() {
         string name = NameField.text;
         PersistentData.Instance.SetName(name);

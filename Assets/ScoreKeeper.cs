@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class ScoreKeeper : MonoBehaviour
 {
 
-    [SerializeField] float score;
+    [SerializeField] int score;
     [SerializeField] Text scoreText;
     [SerializeField] Text levelText;
     [SerializeField] Text playerName;
@@ -33,20 +33,16 @@ public class ScoreKeeper : MonoBehaviour
     public void addScore() {
         addScore(DEFAULT_POINTS);
         scoreText.text = "Score: " + score;
-        
-        if (score > 0.25) {
-            UpdateLevel();
-        }
     }
 
-    public void addScore(float added) {
+    public void addScore(int added) {
 
 
         score += added;
         PersistentData.Instance.SetScore(score);
         scoreText.text = "Score: " + score;
-         if (score > 0.50) {
-            UpdateLevel();
+         if (score > 5 * level) {
+            Invoke("UpdateLevel", 2);
         }
         Debug.Log("score" + score);
     }
