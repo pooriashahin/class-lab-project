@@ -47,7 +47,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void FixedUpdate() {
         balloon.velocity = new Vector2(speed, balloon.velocity.y);
-        if(balloon.position.x < -20 || balloon.position.x > 30) {
+        if(balloon.position.x < -15 || balloon.position.x > 18) {
             Flip();
         }
 
@@ -70,7 +70,7 @@ public class NewBehaviourScript : MonoBehaviour
         balloonScore *= 0.9;
     }
 
-        private void OnTriggerEnter2D (Collider2D other)
+    private void OnTriggerEnter2D (Collider2D other)
     {
         if (other.gameObject.tag  == "myPin" && !isPopped) {
             isPopped = true;
@@ -92,7 +92,14 @@ public class NewBehaviourScript : MonoBehaviour
             //3. coin should disappear
             Invoke("Kill", 1);
         }
-       
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "mario" && PersistentData.Instance.GetDifficulty() == "Difficult") {
+            Destroy(collision.gameObject);
+            PersistentData.Instance.SetScore(0);
+            SceneManager.LoadScene("level1");
+        }
     }
 
     void Kill() {

@@ -8,6 +8,7 @@ public class ButtonFunctions : MonoBehaviour
 {
 
     [SerializeField] InputField NameField;
+    [SerializeField] Dropdown dropdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,10 @@ public class ButtonFunctions : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetDifficulty() {
+        PersistentData.Instance.SetDifficulty(dropdown.value);
     }
 
     public void GoToInstructions() {

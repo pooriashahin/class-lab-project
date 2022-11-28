@@ -13,6 +13,7 @@ TagManager:
   - showOnResume
   - ShowOnPause
   - ShowOnResume
+  - YellowBalloon
   layers:
   - Default
   - TransparentFX
