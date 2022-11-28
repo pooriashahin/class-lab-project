@@ -13,11 +13,12 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] AudioSource audio;
     [SerializeField] Animator animator;
     [SerializeField] bool isPopped = false;
-    [SerializeField] int level = SceneManager.GetActiveScene().buildIndex - 1;
+    [SerializeField] int level;
 
     // Start is called before the first frame update
     void Start()
     {
+        level = SceneManager.GetActiveScene().buildIndex - 1;
         speed = -1.5f;
         if (balloon == null) {
             balloon = GetComponent<Rigidbody2D>();
@@ -38,6 +39,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+        
     }
 
     // Update is called once per frame
@@ -52,8 +54,8 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         if (transform.localScale.x > 0.75) {
+            SceneManager.LoadScene("level" + level);
             Destroy(gameObject);
-            SceneManager.LoadScene(level + 2);
         }
 
         
